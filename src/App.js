@@ -44,7 +44,7 @@ class App extends Component {
     }
 
     render() {
-        let products = this.props.state.filteredProducts;
+        let users = this.props.state.filteredUsers;
         return (
             <div className="App">
                 <section className="hero">
@@ -117,24 +117,24 @@ class App extends Component {
                         </div>
                         <div className='tile is-ancestor' style={{flexWrap: "wrap"}}>
                             {
-                                products && products.length && products.map(product => (
+                                users && users.length && users.map(user => (
                                     <div className='tile is-parent is-3'>
                                         <div className='tile is-child box'>
                                             <p>
                                                 <b>Name: </b>
-                                                {product.name}
+                                                {user.name}
                                             </p>
                                             <p>
                                                 <b>City: </b>
-                                                {product.city}
+                                                {user.city}
                                             </p>
                                             <p>
                                                 <b>Email: </b>
-                                                {product.email}
+                                                {user.email}
                                             </p>
                                             <p>
                                                 <b>Shopping: </b>
-                                                ${product.shopping}
+                                                ${user.shopping}
                                             </p>
                                         </div>
                                     </div>

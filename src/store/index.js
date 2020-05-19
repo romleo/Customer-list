@@ -4,9 +4,9 @@ const initialState = {
 };
 
 const SORT_BY_ALPHABET = "SORT_BY_ALPHABET";
-const SORT_BY_SHOPPING = "SORT_BY_shopping";
+const SORT_BY_SHOPPING = "SORT_BY_SHOPPING";
 const LOAD_DATA = "LOAD_DATA";
-const FILTER_BY_SHOPPING = "FILTER_BY_shopping";
+const FILTER_BY_SHOPPING = "FILTER_BY_SHOPPING";
 const FILTER_BY_VALUE = "FILTER_BY_VALUE";
 const LOAD_NEW_PAGE = "LOAD_NEW_PAGE";
 const LOAD_EXACT_PAGE = "LOAD_EXACT_PAGE";
@@ -46,15 +46,15 @@ export const loadExactPage = (payload) => ({
     payload
 });
 
-const filterStore = (state = initialState, action) => {
+const filterList = (state = initialState, action) => {
     switch (action.type) {
             case SORT_BY_ALPHABET:
                 const sortByAlphabetState = Object.assign({}, state);
                 let sortedAlphabetArr = action.payload.direction === "asc" ?
-                    sortAsc(state.filteredProducts, 'name') :
-                    sortDesc(state.filteredProducts, 'name');
+                    sortAsc(state.filteredUsers, 'name') :
+                    sortDesc(state.filteredUsers, 'name');
 
-                sortByAlphabetState.filteredProducts = sortedAlphabetArr;
+                sortByAlphabetState.filteredUsers = sortedAlphabetArr;
                 sortByAlphabetState.appliedFilters = addFilterIfNotExists(SORT_BY_ALPHABET, sortByAlphabetState.appliedFilters);
                 sortByAlphabetState.appliedFilters = removeFilter(SORT_BY_ALPHABET, sortByAlphabetState.appliedFilters);
 
@@ -62,10 +62,10 @@ const filterStore = (state = initialState, action) => {
         case SORT_BY_SHOPPING:
             let sortByShoppingState = Object.assign({}, state);
             let sortedShoppingArr = action.payload.direction === "asc" ?
-                sortAsc(state.filteredProducts, 'shopping') :
-                sortDesc(state.filteredProducts, 'shopping');
+                sortAsc(state.filteredUsers, 'shopping') :
+                sortDesc(state.filteredUsers, 'shopping');
 
-            sortByShoppingState.filteredProducts = sortedShoppingArr;
+            sortByShoppingState.filteredUsers = sortedShoppingArr;
             sortByShoppingState.appliedFilters = addFilterIfNotExists(SORT_BY_ALPHABET, sortByShoppingState.appliedFilters);
             sortByShoppingState.appliedFilters = removeFilter(SORT_BY_SHOPPING, sortByShoppingState.appliedFilters);
 
@@ -76,9 +76,9 @@ const filterStore = (state = initialState, action) => {
         case FILTER_BY_VALUE:
             let newState = Object.assign({}, state);
             let value = action.payload.value;
-            let filteredValues = state.products.filter(product => {
-                return product.name.toLowerCase().includes(value) ||
-                    product.designer.toLowerCase().includes(value);
+            let filteredValues = state.users.filter(user => {
+                return user.name.toLowerCase().includes(value) ||
+                    user.designer.toLowerCase().includes(value);
             });
 
             let appliedFilters = state.appliedFilters;
@@ -86,32 +86,32 @@ const filterStore = (state = initialState, action) => {
             if (value) {
                 appliedFilters = addFilterIfNotExists(FILTER_BY_VALUE, appliedFilters);
 
-                newState.filteredProducts = filteredValues;
-                newState.filteredCount = newState.filteredProducts.length;
+                newState.filteredUsers = filteredValues;
+                newState.filteredCount = newState.filteredUsers.length;
                 newState.filteredPages = Math.ceil(newState.filteredCount / newState.countPerPage);
 
             } else {
                 appliedFilters = removeFilter(FILTER_BY_VALUE, appliedFilters);
 
                 if (appliedFilters.length === 0) {
-                    newState.filteredProducts = newState.products;
-                    newState.filteredCount = newState.filteredProducts.length;
+                    newState.filteredUsers = newState.users;
+                    newState.filteredCount = newState.filteredUsers.length;
                     newState.filteredPages = Math.ceil(newState.filteredCount / newState.countPerPage);
                 }
             }
             return newState;
         case LOAD_DATA:
             let count = action.payload.count;
-            let countPerPage = action.payload.countPerPage || 20;
+            let countPerPage = action.payload.countPerPage || 30;
 
             //round up
             let totalPages = Math.ceil(count / countPerPage);
 
-            let products = generate(count);
+            let users = generate(count);
             return {
                 ...state,
-                products,
-                filteredProducts: products.slice(0, countPerPage),
+                users,
+                filteredUsers: users.slice(0, countPerPage),
                 currentCount: countPerPage,
                 countPerPage,
                 totalCount: count,
@@ -129,14 +129,14 @@ const filterStore = (state = initialState, action) => {
 
             let perPage = loadNewPageState.countPerPage; //20 by default
 
-            let nextProducts;
+            let nextUsers;
             if (addPages === 1){
                 //Moving from page 1 to 2 will cause ‘upperCount’ to be 40
                 let upperCount = loadNewPageState.currentCount + perPage;
                 let lowerCount = loadNewPageState.currentCount; //This hasn’t been changed. It will remain 20.
 
                 loadNewPageState.currentCount += loadNewPageState.countPerPage;
-                nextProducts = loadNewPageState.products.slice(lowerCount, upperCount);
+                nextUsers = loadNewPageState.users.slice(lowerCount, upperCount);
             }
 
             if (addPages ===-1){
@@ -144,10 +144,10 @@ const filterStore = (state = initialState, action) => {
                 let lowerCount = loadNewPageState.currentCount - perPage; //20
 
                 loadNewPageState.currentCount -= loadNewPageState.countPerPage;
-                nextProducts = loadNewPageState.products.slice(lowerCount - perPage, upperCount - perPage);
+                nextUsers = loadNewPageState.users.slice(lowerCount - perPage, upperCount - perPage);
             }
 
-            loadNewPageState.filteredProducts = nextProducts;
+            loadNewPageState.filteredUsers = nextUsers;
             window.history.pushState({page: 1}, "title 1", `?page=${loadNewPageState.currentPage}`);
             return loadNewPageState;
         case LOAD_EXACT_PAGE:
@@ -156,8 +156,8 @@ const filterStore = (state = initialState, action) => {
             let upperCountExact = exactPageState.countPerPage * exactPage;
             let lowerCountExact = upperCountExact - exactPageState.countPerPage;
 
-            let exactProducts = exactPageState.products.slice(lowerCountExact, upperCountExact);
-            exactPageState.filteredProducts = exactProducts;
+            let exactUsers = exactPageState.users.slice(lowerCountExact, upperCountExact);
+            exactPageState.filteredUsers = exactUsers;
             exactPageState.currentCount = upperCountExact;
             exactPageState.currentPage = exactPage;
             window.history.pushState({page: 1}, "title 1", `?page=${exactPageState.currentPage}`);
@@ -170,7 +170,7 @@ const filterStore = (state = initialState, action) => {
     }
 };
 
-export default filterStore;
+export default filterList;
 
 function sortAsc(arr, field) {
     return arr.sort(function (a, b) {
