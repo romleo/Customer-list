@@ -2,64 +2,64 @@ const random = (arr) => {
     return arr[Math.floor(Math.random() * arr.length)];
 };
 
-const size = () => {
-    return random(['Extra Small', 'Small', 'Medium', 'Large', 'Extra Large']);
+const surName = () => {
+    return random(['Smith', 'Oliynuk', 'Juliani', 'Ivanov', 'Petrov', 'Sidorchuk','Rusinchyk']);
 };
 
-const color = () => {
-    return random(['Red', 'Green', 'Blue', 'Orange', 'Yellow']);
+const name = () => {
+    return random(['Ivan', 'Greg', 'Bob', 'Olga', 'Nikolay' ,'Zlata']);
 };
 
-const designer = () => {
+const city = () => {
     return random([
-        'Ralph Lauren',
-        'Alexander Wang',
-        'Grayse',
-        'Marc NY Performance',
-        'Scrapbook',
-        'J Brand Ready to Wear',
-        'Vintage Havana',
-        'Neiman Marcus Cashmere Collection',
-        'Derek Lam 10 Crosby',
-        'Jordan'
+        'London',
+        'Paris',
+        'Lviv',
+        'Kyiv',
+        'Stokcgolm',
+        'Melburn',
+        'Havana',
+        'Minsk',
+        'Berlin',
+        'Mosckov'
     ]);
 };
 
-const type = () => {
+const email = () => {
     return random([
-        'Cashmere',
-        'Cardigans',
-        'Crew and Scoop',
-        'V-Neck',
-        'Shoes',
-        'Cowl & Turtleneck'
+        '',
+        'Cardigans@yahoo.com',
+        'Crew_and_Scoop@gmail.com',
+        'V_Neck@ukr.net',
+        'Shoesiser@yandeks.ru',
+        'Cowl&Turtleneck@gmail.com'
     ]);
 };
 
-const price = () => {
-    return (Math.random() * 100).toFixed(2);
+const shopping = () => {
+    return Math.floor(Math.random() * 10000);
 };
 
 function generate(count) {
     const data = [];
     for(let i = 0; i < count; i++) {
-        const currentColor = color();
-        const currentSize = size();
-        const currentType = type();
-        const currentDesigner = designer();
-        const currentPrice = price();
+        const currentName = name();
+        const currentSurName = surName();
+        const currentEmail = email();
+        const currentCity = city();
+        const currentShopping = shopping();
 
         data.push({
-            name: `${currentDesigner} ${currentType} ${currentColor} ${currentSize}`,
-            color: currentColor,
-            size: currentSize,
-            designer: currentDesigner,
-            type: currentType,
-            price: currentPrice,
-            salesPrice: currentPrice * .8
+            name: `${currentName} ${currentSurName}`,
+            firstName: currentName,
+            surName: currentSurName,
+            city: currentCity,
+            email: currentEmail,
+            shopping: currentShopping,
+            salesShopping: currentShopping * .8
         });
     }
     return data;
 }
 
-export default generate;
+export default generate

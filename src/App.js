@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {filterByValue, loadData, loadExactPage, loadNewPage, sortByAlphabet, sortByPrice} from "./store";
+import {filterByValue, loadData, loadExactPage, loadNewPage, sortByAlphabet, sortByShopping} from "./store";
 
 class App extends Component {
 
@@ -36,8 +36,8 @@ class App extends Component {
         let value = e.target.value;
         let direction = value.endsWith('asc') ? "asc" : "desc";
 
-        if (value.startsWith('price')){
-            this.props.dispatch(sortByPrice({direction}))
+        if (value.startsWith('shopping')){
+            this.props.dispatch(sortByShopping({direction}))
         }else {
             this.props.dispatch(sortByAlphabet({direction}));
         }
@@ -51,10 +51,10 @@ class App extends Component {
                     <div className="hero-body">
                         <div className="container">
                             <h1 className="title">
-                                Pagination, Filtering and Sorting with React
+                              User List Filtering and Sorting 
                             </h1>
                             <h2 className="subtitle">
-                                A detailed guide
+                                User List
                             </h2>
                         </div>
                     </div>
@@ -101,8 +101,8 @@ class App extends Component {
                                             <option value='alphabet_asc'>Name - A-Z</option>
                                             <option value='alphabet_desc'>Name - Z-A</option>
 
-                                            <option value='price_asc'>Price - Lowest to Highest</option>
-                                            <option value='price_desc'>Price - Highest to Lowest</option>
+                                            <option value='shopping_asc'>shopping - Lowest to Highest</option>
+                                            <option value='shopping_desc'>shopping - Highest to Lowest</option>
 
                                         </select>
                                     </div>
@@ -125,16 +125,16 @@ class App extends Component {
                                                 {product.name}
                                             </p>
                                             <p>
-                                                <b>Designer: </b>
-                                                {product.designer}
+                                                <b>City: </b>
+                                                {product.city}
                                             </p>
                                             <p>
-                                                <b>Type: </b>
-                                                {product.type}
+                                                <b>Email: </b>
+                                                {product.email}
                                             </p>
                                             <p>
-                                                <b>Price: </b>
-                                                ${product.price}
+                                                <b>Shopping: </b>
+                                                ${product.shopping}
                                             </p>
                                         </div>
                                     </div>

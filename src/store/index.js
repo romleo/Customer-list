@@ -4,20 +4,20 @@ const initialState = {
 };
 
 const SORT_BY_ALPHABET = "SORT_BY_ALPHABET";
-const SORT_BY_PRICE = "SORT_BY_PRICE";
+const SORT_BY_SHOPPING = "SORT_BY_shopping";
 const LOAD_DATA = "LOAD_DATA";
-const FILTER_BY_PRICE = "FILTER_BY_PRICE";
+const FILTER_BY_SHOPPING = "FILTER_BY_shopping";
 const FILTER_BY_VALUE = "FILTER_BY_VALUE";
 const LOAD_NEW_PAGE = "LOAD_NEW_PAGE";
 const LOAD_EXACT_PAGE = "LOAD_EXACT_PAGE";
 
-export const sortByPrice = payload => ({
-    type: SORT_BY_PRICE,
+export const sortByShopping = payload => ({
+    type: SORT_BY_SHOPPING,
     payload
 });
 
-export const filterByPrice = payload => ({
-    type: FILTER_BY_PRICE,
+export const filterByShopping = payload => ({
+    type: FILTER_BY_SHOPPING,
     payload
 });
 
@@ -59,19 +59,19 @@ const filterStore = (state = initialState, action) => {
                 sortByAlphabetState.appliedFilters = removeFilter(SORT_BY_ALPHABET, sortByAlphabetState.appliedFilters);
 
                 return sortByAlphabetState;
-        case SORT_BY_PRICE:
-            let sortByPriceState = Object.assign({}, state);
-            let sortedPriceArr = action.payload.direction === "asc" ?
-                sortAsc(state.filteredProducts, 'price') :
-                sortDesc(state.filteredProducts, 'price');
+        case SORT_BY_SHOPPING:
+            let sortByShoppingState = Object.assign({}, state);
+            let sortedShoppingArr = action.payload.direction === "asc" ?
+                sortAsc(state.filteredProducts, 'shopping') :
+                sortDesc(state.filteredProducts, 'shopping');
 
-            sortByPriceState.filteredProducts = sortedPriceArr;
-            sortByPriceState.appliedFilters = addFilterIfNotExists(SORT_BY_ALPHABET, sortByPriceState.appliedFilters);
-            sortByPriceState.appliedFilters = removeFilter(SORT_BY_PRICE, sortByPriceState.appliedFilters);
+            sortByShoppingState.filteredProducts = sortedShoppingArr;
+            sortByShoppingState.appliedFilters = addFilterIfNotExists(SORT_BY_ALPHABET, sortByShoppingState.appliedFilters);
+            sortByShoppingState.appliedFilters = removeFilter(SORT_BY_SHOPPING, sortByShoppingState.appliedFilters);
 
-            return sortByPriceState;
-        case FILTER_BY_PRICE:
-            //filter by price
+            return sortByShoppingState;
+        case FILTER_BY_SHOPPING:
+            //filter by shopping
             return state;
         case FILTER_BY_VALUE:
             let newState = Object.assign({}, state);
