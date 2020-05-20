@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {filterByValue, loadData, loadExactPage, loadNewPage, sortByAlphabet, sortByShopping} from "./store";
-
+import Route from 'react-dom';
 class App extends Component {
 
     componentDidMount() {
@@ -59,6 +59,8 @@ class App extends Component {
                         </div>
                     </div>
                 </section>
+                <Route path="/page/:store={store}">  
+
                 <section className='section'>
                     <div className='container'>
                         <nav className="pagination" role="navigation" aria-label="pagination">
@@ -81,12 +83,14 @@ class App extends Component {
                                             {index + 1}
                                         </button>
                                     ))
+                                    
                                 }
                             </ul>
                         </nav>
 
                     </div>
                 </section>
+                <Route path/>
                 <section className='section'>
                     <div className='container'>
                         <div>
