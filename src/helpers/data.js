@@ -36,7 +36,7 @@ const email = () => {
     ]);
 };
 
-const shopping = () => {
+const subscription = () => {
     return Math.floor(Math.random() * 10000);
 };
 
@@ -47,7 +47,7 @@ function generate(count) {
         const currentSurName = surName();
         const currentEmail = email();
         const currentCity = city();
-        const currentShopping = shopping();
+        const currentSubscription = subscription();
 
         data.push({
             name: `${currentName} ${currentSurName}`,
@@ -55,8 +55,8 @@ function generate(count) {
             surName: currentSurName,
             city: currentCity,
             email: currentEmail,
-            shopping: currentShopping,
-            salesShopping: currentShopping * .8
+            subscription: currentSubscription,
+            salesSubscription: currentSubscription * .8
         });
     }
     return data;

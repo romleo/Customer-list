@@ -4,20 +4,20 @@ const initialState = {
 };
 
 const SORT_BY_ALPHABET = "SORT_BY_ALPHABET";
-const SORT_BY_SHOPPING = "SORT_BY_SHOPPING";
+const SORT_BY_SUBSCRIPTION = "SORT_BY_SUBSCRIPTION";
 const LOAD_DATA = "LOAD_DATA";
-const FILTER_BY_SHOPPING = "FILTER_BY_SHOPPING";
+const FILTER_BY_SUBSCRIPTION = "FILTER_BY_SUBSCRIPTION";
 const FILTER_BY_VALUE = "FILTER_BY_VALUE";
 const LOAD_NEW_PAGE = "LOAD_NEW_PAGE";
 const LOAD_EXACT_PAGE = "LOAD_EXACT_PAGE";
 
-export const sortByShopping = payload => ({
-    type: SORT_BY_SHOPPING,
+export const sortBySubscription = payload => ({
+    type: SORT_BY_SUBSCRIPTION,
     payload
 });
 
-export const filterByShopping = payload => ({
-    type: FILTER_BY_SHOPPING,
+export const filterBySubscription = payload => ({
+    type: FILTER_BY_SUBSCRIPTION,
     payload
 });
 
@@ -48,37 +48,37 @@ export const loadExactPage = (payload) => ({
 
 const filterList = (state = initialState, action) => {
     switch (action.type) {
-            case SORT_BY_ALPHABET:
-                const sortByAlphabetState = Object.assign({}, state);
-                let sortedAlphabetArr = action.payload.direction === "asc" ?
-                    sortAsc(state.filteredUsers, 'name') :
-                    sortDesc(state.filteredUsers, 'name');
+        case SORT_BY_ALPHABET:
+            const sortByAlphabetState = Object.assign({}, state);
+            let sortedAlphabetArr = action.payload.direction === "asc" ?
+                sortAsc(state.filteredUsers, 'name') :
+                sortDesc(state.filteredUsers, 'name');
 
-                sortByAlphabetState.filteredUsers = sortedAlphabetArr;
-                sortByAlphabetState.appliedFilters = addFilterIfNotExists(SORT_BY_ALPHABET, sortByAlphabetState.appliedFilters);
-                sortByAlphabetState.appliedFilters = removeFilter(SORT_BY_ALPHABET, sortByAlphabetState.appliedFilters);
+            sortByAlphabetState.filteredUsers = sortedAlphabetArr;
+            sortByAlphabetState.appliedFilters = addFilterIfNotExists(SORT_BY_ALPHABET, sortByAlphabetState.appliedFilters);
+            sortByAlphabetState.appliedFilters = removeFilter(SORT_BY_ALPHABET, sortByAlphabetState.appliedFilters);
 
-                return sortByAlphabetState;
-        case SORT_BY_SHOPPING:
-            let sortByShoppingState = Object.assign({}, state);
-            let sortedShoppingArr = action.payload.direction === "asc" ?
-                sortAsc(state.filteredUsers, 'shopping') :
-                sortDesc(state.filteredUsers, 'shopping');
+            return sortByAlphabetState;
+        case SORT_BY_SUBSCRIPTION:
+            let sortBySubscriptionState = Object.assign({}, state);
+            let sortedSubscriptionArr = action.payload.direction === "asc" ?
+                sortAsc(state.filteredUsers, 'subscription') :
+                sortDesc(state.filteredUsers, 'subscription');
 
-            sortByShoppingState.filteredUsers = sortedShoppingArr;
-            sortByShoppingState.appliedFilters = addFilterIfNotExists(SORT_BY_ALPHABET, sortByShoppingState.appliedFilters);
-            sortByShoppingState.appliedFilters = removeFilter(SORT_BY_SHOPPING, sortByShoppingState.appliedFilters);
+            sortBySubscriptionState.filteredUsers = sortedSubscriptionArr;
+            sortBySubscriptionState.appliedFilters = addFilterIfNotExists(SORT_BY_ALPHABET, sortBySubscriptionState.appliedFilters);
+            sortBySubscriptionState.appliedFilters = removeFilter(SORT_BY_SUBSCRIPTION, sortBySubscriptionState.appliedFilters);
 
-            return sortByShoppingState;
-        case FILTER_BY_SHOPPING:
-            //filter by shopping
+            return sortBySubscriptionState;
+        case FILTER_BY_SUBSCRIPTION:
+            //filter by subscription
             return state;
         case FILTER_BY_VALUE:
             let newState = Object.assign({}, state);
             let value = action.payload.value;
-            let filteredValues = state.users.filter(user => {
-                return user.name.toLowerCase().includes(value) ||
-                    user.designer.toLowerCase().includes(value);
+            let filteredValues = state.users.filter(users => {
+                return users.name.toLowerCase().includes(value) ||
+                    users.designer.toLowerCase().includes(value);
             });
 
             let appliedFilters = state.appliedFilters;
@@ -130,7 +130,7 @@ const filterList = (state = initialState, action) => {
             let perPage = loadNewPageState.countPerPage; //20 by default
 
             let nextUsers;
-            if (addPages === 1){
+            if (addPages === 1) {
                 //Moving from page 1 to 2 will cause ‘upperCount’ to be 40
                 let upperCount = loadNewPageState.currentCount + perPage;
                 let lowerCount = loadNewPageState.currentCount; //This hasn’t been changed. It will remain 20.
@@ -139,7 +139,7 @@ const filterList = (state = initialState, action) => {
                 nextUsers = loadNewPageState.users.slice(lowerCount, upperCount);
             }
 
-            if (addPages ===-1){
+            if (addPages === -1) {
                 let upperCount = loadNewPageState.currentCount; //40
                 let lowerCount = loadNewPageState.currentCount - perPage; //20
 
@@ -148,7 +148,7 @@ const filterList = (state = initialState, action) => {
             }
 
             loadNewPageState.filteredUsers = nextUsers;
-            window.history.pushState({page: 1}, "title 1", `?page=${loadNewPageState.currentPage}`);
+            window.history.pushState({ page: 1 }, "title 1", `?page=${loadNewPageState.currentPage}`);
             return loadNewPageState;
         case LOAD_EXACT_PAGE:
             const exactPageState = Object.assign({}, state);
@@ -160,7 +160,7 @@ const filterList = (state = initialState, action) => {
             exactPageState.filteredUsers = exactUsers;
             exactPageState.currentCount = upperCountExact;
             exactPageState.currentPage = exactPage;
-            window.history.pushState({page: 1}, "title 1", `?page=${exactPageState.currentPage}`);
+            window.history.pushState({ page: 1 }, "title 1", `?page=${exactPageState.currentPage}`);
 
             return exactPageState;
 
@@ -176,7 +176,7 @@ function sortAsc(arr, field) {
     return arr.sort(function (a, b) {
         if (a[field] > b[field]) return 1;
 
-        if (b[field]> a[field]) return -1;
+        if (b[field] > a[field]) return -1;
 
         return 0;
     })
@@ -186,7 +186,7 @@ function sortDesc(arr, field) {
     return arr.sort(function (a, b) {
         if (a[field] > b[field]) return -1;
 
-        if (b[field]> a[field]) return 1;
+        if (b[field] > a[field]) return 1;
 
         return 0;
     })
@@ -194,7 +194,7 @@ function sortDesc(arr, field) {
 
 function addFilterIfNotExists(filter, appliedFilters) {
     let index = appliedFilters.indexOf(filter);
-    if (index===-1) appliedFilters.push(filter);
+    if (index === -1) appliedFilters.push(filter);
 
     return appliedFilters;
 }

@@ -1,0 +1,66 @@
+import React from 'react';
+// import { useParams } from "react-router-dom";
+import SearchField from "react-search-field";
+import MyForm from './Form';
+import ListButton from './ListButton';
+
+
+// const { id } = useParams();
+
+        
+//         console.log(id);
+//         this.fetchData(id);
+//     }
+
+//     fetchData = () => {
+//         // ...
+//     };
+
+
+
+    const User =()=> {
+        
+        
+        return (
+            <div>
+                <section>
+                    <div className='list-button'>
+                        <ListButton/>
+                    </div>
+                </section>
+                <section>
+                    <div className='search'>
+                        <SearchField
+                            placeholder='Search item'
+                            onClick={() => this.goToUsers()}
+                        />
+                    </div>
+                </section>
+                <div className='tile is-parent is-3'>
+                    <div className='tile is-child box'>
+                        <p>
+                            <b>Name:Ivan Smit</b>
+                            
+                        </p>
+                        <p>
+                            <b>City:Lviv </b>
+                            
+                        </p>
+                        <p>
+                            <b>Email: V_Neck@ukr.net</b>
+                            
+                        </p>
+                        <p>
+                            <b>subscription: active</b>
+                            
+                            <MyForm/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+
+
+export default User;
