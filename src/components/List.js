@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { filterByValue, loadData, loadExactPage, loadNewPage, sortByAlphabet, sortBySubscription } from "../store"
-
+// import NavLink from "react-router-dom";
 class List extends Component {
 
 
@@ -125,15 +125,18 @@ class List extends Component {
                                 </div>
                             </div>
                         </div>
+                        
                         <div className='tile is-ancestor' style={{ flexWrap: "wrap" }}>
                                 
                                 {
                                 users && users.length && users.map(user => (
                                 <div className='tile is-parent is-3'>
+                                    
                                     <div className='tile is-child box'>
                                         <p>
-                                            <b>Name: </b>
-                                            {user.name}
+                                           <a href="/User/1">Name:  
+                                              {user.name}</a> 
+                                            
                                         </p>
                                         <p>
                                             <b>City: </b>
@@ -152,8 +155,9 @@ class List extends Component {
                             ))
                         }
 
-
                         </div>
+                    
+
                     </div>
                 </section>
             </div>

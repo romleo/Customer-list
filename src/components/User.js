@@ -5,7 +5,7 @@ import MyForm from './Form';
 import ListButton from './ListButton';
 
 
-// const { id } = useParams();
+
 
         
 //         console.log(id);
@@ -19,7 +19,7 @@ import ListButton from './ListButton';
 
 
     const User =()=> {
-        
+        // const { id } = useParams(); 
         
         return (
             <div>
