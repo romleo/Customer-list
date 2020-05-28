@@ -1,20 +1,11 @@
 import React from 'react';
 // import { useParams } from "react-router-dom";
 import SearchField from "react-search-field";
-import MyForm from './Form';
-import ListButton from './ListButton';
-
-
-
-
-        
-//         console.log(id);
-//         this.fetchData(id);
-//     }
-
-//     fetchData = () => {
-//         // ...
-//     };
+// import MyForm from './Form';
+import ListButton from './Forms/ListButton';
+import ValidDataForm from './Forms/ValidDataForm';
+import DataRange from './Forms/DataRange';
+// import CheckList from './Forms/CheckList'
 
 
 
@@ -52,8 +43,10 @@ import ListButton from './ListButton';
                         </p>
                         <p>
                             <b>subscription: active</b>
-                            
-                            <MyForm/>
+                            {/* <CheckList/> */}
+                             <ValidDataForm/> 
+                            {/* <MyForm/> */}
+                            {/* <DataRange/> */}
                         </p>
                     </div>
                 </div>

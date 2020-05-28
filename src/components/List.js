@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { filterByValue, loadData, loadExactPage, loadNewPage, sortByAlphabet, sortBySubscription } from "../store"
+// import ValidDataForm from './Forms/ValidDataForm';
 // import NavLink from "react-router-dom";
+
 class List extends Component {
 
 
@@ -54,12 +56,15 @@ class List extends Component {
                 <section className="hero">
                     <div className="hero-body">
                         <div className="container">
+                            <div className ="calendar">
+                            {/* <ValidDataForm/> */}
                             <h1 className="title">
                                 User List Filtering and Sorting
                             </h1>
                             <h2 className="subtitle">
                                 User List
                             </h2>
+                           </div>
                         </div>
                     </div>
                 </section>
