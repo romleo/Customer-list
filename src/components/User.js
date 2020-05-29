@@ -1,7 +1,7 @@
 import React from 'react';
 // import { useParams } from "react-router-dom";
 // import SearchField from "react-search-field";
-import SignupForm from './Forms/SignupForm';
+import SetSubscriptionForm from './Forms/SetSubscriptionForm';
 import ListButton from './Forms/ListButton';
 // import ValidDataForm from './Forms/ValidDataForm';
 // import DataRange from './Forms/DataRange';
@@ -44,7 +44,7 @@ import Calendar from './Forms/DatePicer';
                             </div>
                             {/* <CheckList/> */}
                              {/* <ValidDataForm/>  */}
-                            <SignupForm/>
+                            <SetSubscriptionForm/>
                             {/* <DataRange/> */}
                         </p>
                     </div>

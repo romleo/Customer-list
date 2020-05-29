@@ -21,7 +21,7 @@ const validate = values => {
   return errors;
 };
 
-const SignupForm = () => {
+const SetSubscriptionForm = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
   const formik = useFormik({
@@ -60,4 +60,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SetSubscriptionForm;
