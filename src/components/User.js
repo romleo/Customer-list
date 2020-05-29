@@ -1,13 +1,14 @@
 import React from 'react';
 // import { useParams } from "react-router-dom";
-import SearchField from "react-search-field";
-// import MyForm from './Form';
+// import SearchField from "react-search-field";
+import SignupForm from './Forms/SignupForm';
 import ListButton from './Forms/ListButton';
-import ValidDataForm from './Forms/ValidDataForm';
-import DataRange from './Forms/DataRange';
+// import ValidDataForm from './Forms/ValidDataForm';
+// import DataRange from './Forms/DataRange';
 // import CheckList from './Forms/CheckList'
 
-
+// import DatePicker from "react-datepicker";
+import Calendar from './Forms/DatePicer';
 
     const User =()=> {
         // const { id } = useParams(); 
@@ -20,12 +21,6 @@ import DataRange from './Forms/DataRange';
                     </div>
                 </section>
                 <section>
-                    <div className='search'>
-                        <SearchField
-                            placeholder='Search item'
-                            onClick={() => this.goToUsers()}
-                        />
-                    </div>
                 </section>
                 <div className='tile is-parent is-3'>
                     <div className='tile is-child box'>
@@ -43,9 +38,13 @@ import DataRange from './Forms/DataRange';
                         </p>
                         <p>
                             <b>subscription: active</b>
+                            <div>
+                               < Calendar/>
+          
+                            </div>
                             {/* <CheckList/> */}
-                             <ValidDataForm/> 
-                            {/* <MyForm/> */}
+                             {/* <ValidDataForm/>  */}
+                            <SignupForm/>
                             {/* <DataRange/> */}
                         </p>
                     </div>

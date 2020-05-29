@@ -56,7 +56,7 @@ class List extends Component {
                 <section className="hero">
                     <div className="hero-body">
                         <div className="container">
-                            <div className ="calendar">
+                            <div className="calendar">
                             {/* <ValidDataForm/> */}
                             <h1 className="title">
                                 User List Filtering and Sorting
