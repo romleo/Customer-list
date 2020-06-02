@@ -1,8 +1,24 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { filterByValue, loadData, loadExactPage, loadNewPage, sortByAlphabet, sortBySubscription } from "../store"
-// import ValidDataForm from './Forms/ValidDataForm';
-// import NavLink from "react-router-dom";
+import Axios from 'axios';
+
+
+const baseUrl = 'http://34.215.163.120:80'
+const token = '';
+
+function getUsers({
+    page,
+    perPage = 20,
+    name = '',
+}) {
+    return Axios({
+        method: 'get',
+        url: `${baseUrl}/admin/users?page=${page}&per_page=${perPage}&first_name=${name}`,
+        headers: {
+            'Auth': `Bearer ${token}`
+        }
+    })
+}
 
 class List extends Component {
 
@@ -16,6 +32,10 @@ class List extends Component {
 
         }
         this.props.dispatch(loadData({ count: 40 }));
+        getUsers({ page: 1 }).then((response) => {
+            console.log (this.data)
+            // this.setState({ list: response.data, page: 1 })
+        })
     }
 
     filterByInput(e) {
@@ -49,6 +69,7 @@ class List extends Component {
     render() {
 
         let users = this.props.state.filteredUsers;
+        const list = this.state.list;
         return (
 
 
@@ -139,17 +160,17 @@ class List extends Component {
                                     
                                     <div className='tile is-child box'>
                                         <p>
-                                           <a href="/User/1">Name:  
-                                              {user.name}</a> 
+                                           <a href="/User/1">id:  
+                                              {user.id}</a> 
                                             
-                                        </p>
-                                        <p>
-                                            <b>City: </b>
-                                            {user.city}
                                         </p>
                                         <p>
                                             <b>Email: </b>
                                             {user.email}
+                                        </p>
+                                        <p>
+                                            <b>Subscription: </b>
+                                            {user.subscription}
                                         </p>
                                         <p>
                                             <b>Subscription: </b>
