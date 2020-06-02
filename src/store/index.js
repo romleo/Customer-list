@@ -1,4 +1,5 @@
-import generate from "../helpers/data";
+import generate from "axios";
+
 const initialState = {
     appliedFilters: []
 };

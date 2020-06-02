@@ -155,30 +155,11 @@ class List extends Component {
                         <div className='tile is-ancestor' style={{ flexWrap: "wrap" }}>
                                 
                                 {
-                                users && users.length && users.map(user => (
-                                <div className='tile is-parent is-3'>
-                                    
-                                    <div className='tile is-child box'>
-                                        <p>
-                                           <a href="/User/1">id:  
-                                              {user.id}</a> 
-                                            
-                                        </p>
-                                        <p>
-                                            <b>Email: </b>
-                                            {user.email}
-                                        </p>
-                                        <p>
-                                            <b>Subscription: </b>
-                                            {user.subscription}
-                                        </p>
-                                        <p>
-                                            <b>Subscription: </b>
-                                            {user.subscription}$
-                                            </p>
-                                    </div>
-                                </div>
-                            ))
+                    <ol>
+                        {this.state.user.map(user => <li>{user.name}</li>)}
+                    </ol>
+                    
+                  }
                         }
 
                         </div>
@@ -195,4 +176,4 @@ function mapStateToProps(state) {
     return { state };
 }
 
-export default connect(mapStateToProps)(List);
+export default (mapStateToProps)(List);
