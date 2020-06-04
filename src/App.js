@@ -1,5 +1,5 @@
 import React from 'react';
-import List from './components/List';
+import List2 from './components/List2';
 import User from './components/User';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
@@ -8,12 +8,12 @@ const App = () => {
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Switch>
-                    <Route path='/' exact component={List}/> 
-                    <Route path='/List' component={List}/> 
+                    <Route path='/' exact component={List2}/> 
+                    <Route path='/List2' component={List2}/> 
                     <Route path="/User/:id" component={User}/>
                 </Switch>
             </div>
         </BrowserRouter>)
 }
 
-export default (App);
+export default App;
